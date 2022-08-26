@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>HTML5 canvas shapes</title>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.8.24/jquery-ui.min.js" type="text/javascript"></script>
+	<link href="http://code.jquery.com/ui/1.8.24/themes/blitzer/jquery-ui.css" rel="stylesheet"
+	type="text/css" />
+<style type="text/css">
+body
+{
+    font-family: Arial;
+    font-size: 10pt;
+}
+
+.draggable
+{
+    filter: alpha(opacity=60);
+    opacity: 0.6;
+}
+.dropped
+{
+    position: static !important;
+}
+
+</style>
+</head>
+
+<body>
+<h2>Component Catalog</h2>
+<div style="width: 350px; height: 400px; left: 0px; right: 0px; border:1px solid #000000;">
+
+
+		<div class="square" style="position:absolute; top:60px; left: 20px; height: 50px; width: 50px; background-color: #555;"></div>
+		<div class="circle" style="height: 50px; width: 50px; background-color: #555; border-radius: 50%; position:absolute; left:90px; top:60px;"></div>
+		<div class="rectangle" style="height: 50px; width: 100px; background-color: #555; left:150px; top:60px; position:absolute; "></div>
+		<div class="triangle-up" style="width: 0; height: 0; border-left: 25px solid transparent; border-right: 25px solid transparent; border-bottom: 50px solid #555; left:270px; top:60px; position:absolute;"></div>
+
+
+</div>
+<!--<h2 style="position: absolute; left: 380px; top: 0px; right: 0px; bottom: 0px;">Workflow Canvas</h2>-->
+<div id="dvDest", style="position: absolute; left: 370px; top: 0px; right: 0px; bottom: 0px; overflow: auto; border:1px solid #000000;">
+
+<div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true" style="display: none;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Set Properties</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <i class="fas fa-envelope prefix grey-text"></i>
+          <input type="email" id="defaultForm-email" class="form-control validate">
+          <label data-error="wrong" data-success="right" for="defaultForm-email">key</label>
+        </div>
+
+        <div class="md-form mb-4">
+          <i class="fas fa-lock prefix grey-text"></i>
+          <input type="password" id="defaultForm-pass" class="form-control validate">
+          <label data-error="wrong" data-success="right" for="defaultForm-pass">value</label>
+        </div>
+
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button class="btn btn-default">submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+<script type="text/javascript">
+$(function () {
+    $(".square").draggable({
+        revert: "invalid",
+        refreshPositions: true,
+        drag: function (event, ui) {
+            ui.helper.addClass("draggable");
+        },
+
+    });
+    $("#dvDest").droppable({
+        drop: function (event, ui) {
+            if ($("#dvDest").length == 0) {
+                $("#dvDest").html("");
+            }
+            ui.draggable.addClass("dropped");
+            $("#dvDest").append(ui.draggable);
+        }
+    });
+});
+
+
+$( ".square" ).contextmenu(function() {
+ document.getElementById ("modalLoginForm").style.display = "block";
+});
+</script>
+
+
+<!--<div style="width: 200px; height: 100px;-->
+<!--				left: 0px; right: 0px;">-->
+<!--    <h2>Connectors</h2>-->
+<!--<canvas id="myCanvas" width="350" height="350" style="border:1px solid #000000;">-->
+<!--</canvas>-->
+<!--</div>-->
+<!--</body>-->
+
+</html>
